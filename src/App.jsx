@@ -6,18 +6,18 @@ function App() {
   const[plantilla, setPlantilla] = useState([])
   const[nombre, setNombre] = useState("")
   const[banda, setBanda] = useState("")
+  const[validacion, setValidacion] = useState(false)
 
-  const addUsuario = (usuario) =>{
+  /*const addUsuario = (usuario) =>{
     setPlantilla([...plantilla, usuario]);
-  }
+  }*/
   const handleSubmit = (e) =>{
     e.preventDefault();
-    if(nombre.startsWith("") && nombre.length <= 3 && banda.length < 6){
+    if(nombre.trim() === "" || nombre.length <= 3 || banda.length < 6){
       alert("Por favor chequea que la información sea correcta")
     }else{
-      addUsuario({nombre, banda});
-      setNombre("");
-      setBanda(""); 
+      /*addUsuario({nombre, banda});*/
+      setValidacion(true);
     }
   }
 
@@ -32,7 +32,7 @@ function App() {
         <br></br>
         <button type="submit">Submit</button>
         </form>
-        <Card usuario={plantilla}/>
+        {validacion && <Card nombre={nombre} banda={banda}/>}
       </div>
     </>
   )
